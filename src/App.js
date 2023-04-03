@@ -1,25 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
+import TeslaTable from "./components/TeslaTable";
+import useGetData from "./hooks/useGetData";
+import "./App.css";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const { data, isLoading, error } = useGetData();
+
+  if (isLoading) return <h1>Loading...</h1>;
+  if (error) return <h1>{error}</h1>;
+
+  return <TeslaTable data={data} />;
 }
 
 export default App;
